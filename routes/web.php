@@ -31,3 +31,7 @@ Route::get('/my-bookings', function () {
     $bookings = Booking::where('user_id', auth()->id())->get();
     return view('my-bookings', compact('bookings'));
 })->middleware('auth')->name('my.bookings');
+
+Route::get('/profile/edit-form', function () {
+    return view('profile.edit-form');
+})->middleware('auth')->name('profile.edit.form');

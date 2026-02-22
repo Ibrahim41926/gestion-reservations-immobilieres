@@ -61,10 +61,16 @@ Password: password
 ## ⚙️ Installation
 
 ```bash
+## ⚙️ Installation
+
+```bash
 git clone <repo>
-cd project
+cd <repo>
 composer install
+npm install
 cp .env.example .env
 php artisan key:generate
 php artisan migrate
 php artisan serve
+npm run dev
+```
