@@ -11,7 +11,7 @@
             <div class="flex flex-col items-center text-center">
 
                 <div class="w-20 h-20 bg-blue-600 text-white flex items-center justify-center rounded-full text-2xl font-bold shadow-md">
-                    {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
+                   {{ collect(explode(' ', auth()->user()->name))->map(fn($word) => strtoupper($word[0]))->join('') }}
                 </div>
 
                 <h2 class="mt-4 font-semibold">
