@@ -38,15 +38,16 @@ public function book(): void
         return;
     }
 
-  Booking::create([
-    'user_id' => Auth::id(),
-    'property_id' => $this->property->id,
-    'start_date' => $this->start_date,
-    'end_date' => $this->end_date,
-    'status' => 'pending',
-]);
+    Booking::create([
+        'user_id' => Auth::id(),
+        'property_id' => $this->property->id,
+        'start_date' => $this->start_date,
+        'end_date' => $this->end_date,
+        'status' => 'pending',
+    ]);
 
     session()->flash('message', 'Booking successful!');
+    $this->dispatch('booking-created', propertyId: $this->property->id);
 
     $this->start_date = null;
     $this->end_date = null;
