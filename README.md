@@ -1,63 +1,94 @@
 # Real Estate Booking System
 
-Projet realise dans le cadre d'un test technique Laravel.
+Application Laravel de gestion de reservations immobilieres avec un espace client et un panneau d'administration Filament.
 
-Application de gestion de reservations immobilieres avec separation claire entre espace client et administration.
+## Presentation du projet
 
-## Stack Technique
+Ce projet permet a un utilisateur de:
+- consulter des proprietes,
+- effectuer des reservations,
+- suivre ses reservations,
+- gerer son profil.
+
+Un administrateur peut gerer les donnees metier depuis Filament (utilisateurs, proprietes, reservations) avec des statistiques globales.
+
+## Stack technique
 
 - Laravel 12
+- PHP 8.3+
 - Livewire
 - Filament v5
-- TailwindCSS
+- Tailwind CSS
 - MySQL / SQLite
 
-## Fonctionnalites
+## Fonctionnalites principales
 
-### Cote Client
+### Cote client
+- Authentification (inscription, connexion, deconnexion)
+- Verification email pour l'acces aux pages protegees
+- Liste des proprietes disponibles
+- Reservation d'une propriete via Livewire
+- Prevention des chevauchements de reservations
+- Consultation des reservations personnelles
+- Mise a jour du profil et suppression du compte
 
-- Inscription, connexion, deconnexion
-- Verification d'email pour l'acces aux pages protegées
-- Consultation des proprietés
-- Reservation d'une proprieté via composant Livewire
-- Prevention des chevauchements de reservations sur une meme propriete
-- Consultation de ses reservations (`/my-bookings`)
-- Gestion du profil: modification des informations et suppression du compte
+### Cote admin
+- Acces au panel `/admin` (role admin uniquement)
+- Dashboard avec statistiques (utilisateurs, proprietes, reservations)
+- CRUD proprietes
+- Gestion des utilisateurs et des roles
+- Gestion des reservations (edition, statut, suppression)
+- Creation de reservation admin desactivee
 
-### Cote Admin (Filament `/admin`)
+## Apercu de l'application
 
-- Dashboard avec widget de statistiques:
-  - total utilisateurs
-  - total reservations
-  - total proprietés
-  - reservations actives
-- Gestion CRUD des proprietes
-- Gestion des utilisateurs (nom, email, role, mot de passe)
-- Gestion des reservations existantes:
-  - consultation
-  - modification du statut (`pending`, `approved`, `cancelled`)
-  - edition / suppression
+### Dashboard utilisateur
+Vue d'ensemble de l'espace client apres connexion, avec acces rapide aux actions principales.
 
-## Gestion des roles et acces
+<p align="center">
+  <img src="Screenshoots/TAbleau%20de%20bord%20cot%C3%A9%20Client.jpg" alt="Dashboard utilisateur" width="700" />
+</p>
 
-- Role par defaut: `client`
-- Les admins sont rediriges automatiquement vers `/admin` apres connexion
-- Les clients n'ont pas acces au panel admin
-- Les admins n'ont pas acces aux routes client de reservation
+### Page Profil
+Page de consultation du profil utilisateur et acces aux actions de mise a jour.
 
-## Routes principales
+<p align="center">
+  <img src="Screenshoots/Page%20profile.jpg" alt="Page Profil" width="700" />
+</p>
 
-- `/` page d'accueil
-- `/dashboard` espace client (auth + email verifie)
-- `/properties` liste des proprietes
-- `/my-bookings` reservations de l'utilisateur connecte
-- `/profile` page profil
-- `/admin` panneau d'administration Filament
+### Liste des proprietes
+Liste des biens disponibles avec leurs informations principales.
+
+<p align="center">
+  <img src="Screenshoots/Page%20propreties.jpg" alt="Liste des proprietes" width="700" />
+</p>
+
+### Page reservations
+Vue des reservations de l'utilisateur (statut, periode, details associes).
+
+<p align="center">
+  <img src="Screenshoots/PAge%20mes%20reservations.jpg" alt="Page reservations" width="700" />
+</p>
+
+### Panneau admin
+Dashboard Filament pour le pilotage global de l'application.
+
+<p align="center">
+  <img src="Screenshoots/Tableau%20de%20Bord%20Admin(Filament).jpg" alt="Panneau admin Filament" width="700" />
+</p>
+
+## Legende des captures
+
+- `Screenshoots/TAbleau de bord coté Client.jpg` : dashboard de l'utilisateur connecte.
+- `Screenshoots/Page profile.jpg` : page profil utilisateur.
+- `Screenshoots/Page propreties.jpg` : catalogue des proprietes.
+- `Screenshoots/PAge mes reservations.jpg` : reservations de l'utilisateur.
+- `Screenshoots/Tableau de Bord Admin(Filament).jpg` : panneau admin Filament.
 
 ## Installation
 
 ```bash
-git clone <repo>
+git clone <repo-url>
 cd <repo>
 composer install
 npm install
@@ -68,16 +99,18 @@ php artisan serve
 npm run dev
 ```
 
-## Notes utiles
+## Comptes de test
 
-- Le seeder par defaut cree un utilisateur test: `test@example.com`
-- Pour creer un admin rapidement:
+### Compte client (seed par defaut)
+- Email: `test@example.com`
+- Mot de passe: `password`
+
+### Compte admin
+Aucun compte admin n'est seed par defaut. Creez-en un via Tinker:
 
 ```bash
 php artisan tinker
 ```
-
-Puis:
 
 ```php
 \App\Models\User::create([
@@ -87,3 +120,7 @@ Puis:
     'role' => 'admin',
 ]);
 ```
+
+## Auteur
+
+Souleymane Diallo
