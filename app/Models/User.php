@@ -61,4 +61,11 @@ class User extends Authenticatable implements FilamentUser
     {
         return $this->role === 'admin';
     }
+    public function getInitialsAttribute()
+{
+    return collect(explode(' ', trim($this->name)))
+        ->filter()
+        ->map(fn($word) => strtoupper(mb_substr($word, 0, 1)))
+        ->join('');
+}
 }

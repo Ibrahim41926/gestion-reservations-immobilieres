@@ -51,8 +51,8 @@ Application de gestion de réservations immobilières avec :
 
 ## 🧪 Comptes de test
 👑 Admin
-Email: admin@test.com
-Password: password
+Email: admin@site.com
+Password: password123
 
 👤 User
 Email: user@test.com
