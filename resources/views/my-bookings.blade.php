@@ -8,7 +8,7 @@
             Mes reservations
         </h1>
         <p class="text-blue-100 text-base md:text-lg max-w-2xl">
-            Consulte l'historique de tes sejours et le detail de tes reservations en un seul endroit.
+            Consulte l'historique de tes sejours et le details de tes reservations en un seul endroit.
         </p>
     </div>
 
@@ -16,7 +16,7 @@
         <h2 class="text-2xl font-bold text-gray-800 mb-2">Resume</h2>
         <p class="text-gray-600">
             Tu as <span class="font-semibold text-blue-600">{{ $bookings->count() }}</span>
-            reservation{{ $bookings->count() > 1 ? 's' : '' }} enregistree{{ $bookings->count() > 1 ? 's' : '' }}.
+            reservation{{ $bookings->count() > 1 ? 's' : '' }} enregistrée{{ $bookings->count() > 1 ? 's' : '' }}.
         </p>
     </div>
 
@@ -43,7 +43,7 @@
             </div>
         @empty
             <div class="bg-white rounded-2xl shadow-md p-8 text-center text-gray-600">
-                Aucune reservation trouvee pour le moment.
+                Aucune reservation trouvée pour le moment.
             </div>
         @endforelse
     </div>

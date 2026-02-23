@@ -1,18 +1,10 @@
-#  Real Estate Booking System
+# Real Estate Booking System
 
-Projet réalisé dans le cadre d’un test technique Laravel.
+Projet realise dans le cadre d'un test technique Laravel.
 
-Application de gestion de réservations immobilières avec :
+Application de gestion de reservations immobilieres avec separation claire entre espace client et administration.
 
-- Authentification
-- Rôles (User / Admin)
-- Réservation avec statut
-- Interface utilisateur
-- Panneau d’administration avec Filament
-
----
-
-## 🚀 Stack Technique
+## Stack Technique
 
 - Laravel 12
 - Livewire
@@ -20,48 +12,49 @@ Application de gestion de réservations immobilières avec :
 - TailwindCSS
 - MySQL / SQLite
 
----
+## Fonctionnalites
 
-## 👥 Fonctionnalités
+### Cote Client
 
-### 👤 Utilisateur
+- Inscription, connexion, deconnexion
+- Verification d'email pour l'acces aux pages protegées
+- Consultation des proprietés
+- Reservation d'une proprieté via composant Livewire
+- Prevention des chevauchements de reservations sur une meme propriete
+- Consultation de ses reservations (`/my-bookings`)
+- Gestion du profil: modification des informations et suppression du compte
 
-- Inscription / Connexion
-- Consultation des propriétés
-- Réservation d’une propriété
-- Consultation de ses réservations
-- Statut des réservations (pending, approved, cancelled)
+### Cote Admin (Filament `/admin`)
 
-### 👑 Administrateur
+- Dashboard avec widget de statistiques:
+  - total utilisateurs
+  - total reservations
+  - total proprietés
+  - reservations actives
+- Gestion CRUD des proprietes
+- Gestion des utilisateurs (nom, email, role, mot de passe)
+- Gestion des reservations existantes:
+  - consultation
+  - modification du statut (`pending`, `approved`, `cancelled`)
+  - edition / suppression
 
-- Accès au panneau `/admin`
-- Gestion des propriétés
-- Gestion des réservations
-- Modification du statut des réservations
+## Gestion des roles et acces
 
----
+- Role par defaut: `client`
+- Les admins sont rediriges automatiquement vers `/admin` apres connexion
+- Les clients n'ont pas acces au panel admin
+- Les admins n'ont pas acces aux routes client de reservation
 
-## 🔐 Gestion des rôles
+## Routes principales
 
-- Les utilisateurs normaux ne peuvent pas accéder au panneau admin.
-- Les administrateurs sont redirigés automatiquement vers `/admin`.
-- Les admins ne peuvent pas réserver.
+- `/` page d'accueil
+- `/dashboard` espace client (auth + email verifie)
+- `/properties` liste des proprietes
+- `/my-bookings` reservations de l'utilisateur connecte
+- `/profile` page profil
+- `/admin` panneau d'administration Filament
 
----
-
-## 🧪 Comptes de test
-👑 Admin
-Email: admin@site.com
-Password: password123
-
-👤 User
-Email: user@test.com
-Password: password
-
-## ⚙️ Installation
-
-```bash
-## ⚙️ Installation
+## Installation
 
 ```bash
 git clone <repo>
@@ -70,7 +63,27 @@ composer install
 npm install
 cp .env.example .env
 php artisan key:generate
-php artisan migrate
+php artisan migrate --seed
 php artisan serve
 npm run dev
+```
+
+## Notes utiles
+
+- Le seeder par defaut cree un utilisateur test: `test@example.com`
+- Pour creer un admin rapidement:
+
+```bash
+php artisan tinker
+```
+
+Puis:
+
+```php
+\App\Models\User::create([
+    'name' => 'Admin',
+    'email' => 'admin@site.com',
+    'password' => 'password123',
+    'role' => 'admin',
+]);
 ```
