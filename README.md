@@ -157,5 +157,4 @@ php artisan tinker
 ```
 
 ## Auteur
-
-Souleymane Diallo
+Ibrahim Balde
